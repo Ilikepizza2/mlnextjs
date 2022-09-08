@@ -44,7 +44,7 @@ export default function Home({ data }) {
           </div>
           <div className="result">
             {datajson&&datajson.code=="200"&&buttonClicked? <Image src={datajson.data} className="form--image" width={"800px"} height={"800px"} alt="Generated Image" /> : ""}          
-            {datajson? datajson.code=="404"? <div>Our request activated the API&apos;s safety filters and could not be processed. Please modify the prompt and try again.</div> : '': ''}
+            {datajson? datajson.code=="404"? <div className='form--error'>Our request activated the API&apos;s safety filters and could not be processed. Please modify the prompt and try again.</div> : '': ''}
           </div>
       </main>
   )
