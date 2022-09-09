@@ -7,15 +7,16 @@ export default function Home({ data }) {
   const [datajson, setDatajson] = React.useState()
   const [buttonClicked, setButtonClicked] = React.useState(0)
   const [prompt, setPrompt] = React.useState()
-  
+  const [isLoading, setIsLoading] = React.useState(false)
   React.useEffect(() => {
     const URL = "http://127.0.0.1:5000/result/"+prompt
     if(buttonClicked!=0)
     fetch(URL)
       .then((res) => res.json())
       .then((data) => {
+        setIsLoading(false)
         setDatajson(data)
-        console.log(data)
+        // console.log(data)
       })
   }, [buttonClicked])
 
@@ -23,6 +24,7 @@ export default function Home({ data }) {
       setPrompt(() => (event.target.value))
   }
   function settingButtonClicked(){
+    setIsLoading(true)
     setButtonClicked((prev) => prev+1)
   }
   return (
@@ -43,8 +45,12 @@ export default function Home({ data }) {
               </button>
           </div>
           <div className="result">
-            {datajson&&datajson.code=="200"&&buttonClicked? <Image src={datajson.data} className="form--image" width={"800px"} height={"800px"} alt="Generated Image" /> : ""}          
-            {datajson? datajson.code=="404"? <div className='form--error'>Our request activated the API&apos;s safety filters and could not be processed. Please modify the prompt and try again.</div> : '': ''}
+          {isLoading&&<div className="spinner-container">
+            <div className="loading-spinner">
+            </div>
+          </div>}
+            {datajson&&datajson.code=="200"&&buttonClicked&&!isLoading? <Image src={datajson.data} className="form--image" width={"800px"} height={"800px"} alt="Generated Image" /> : ""}          
+            {datajson? datajson.code=="404"&&!isLoading? <div className='form--error'>Our request activated the API&apos;s safety filters and could not be processed. Please modify the prompt and try again.</div> : '': ''}
           </div>
       </main>
   )
