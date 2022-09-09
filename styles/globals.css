@@ -1,10 +1,10 @@
-.index--body{
-  margin-top: -1vh;
-  margin-left: -1vw;
-  height: 101vh;
-  width: 101vw;
+body{
+  height: 100vh;
+  width: 100vw;
   background-color: #292a2c;
+  overflow: hidden;
 }
+
 .form--input{
   width: 70%;
   margin-top: 20px;
@@ -16,15 +16,42 @@
   padding-right: 10px;
   margin-left: 3%;
 }
+
 .form--button{
   width: 400px;
   height: 35px;
 }
+
+.form--button:active{
+  color: azure;
+}
+
 .result{
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.form--error{
-  color: white;
+
+.form--button:active{
+  /* background-color: #888f9c; */
+}
+
+@media only screen and (max-width: 1680px) {
+  .form--input{
+    width: 70%;
+    margin-top: 60px;
+    text-align: center;
+  }
+
+  .form--button{
+    width: 70%;
+  }
+
+  .form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
 }
